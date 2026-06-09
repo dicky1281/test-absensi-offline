@@ -1,0 +1,88 @@
+@import "tailwindcss";
+html,
+body,
+* {
+  forced-color-adjust: none !important;
+}
+@layer base {
+  @font-face {
+    font-family: "Open Sans";
+    src: url("/fonts/OpenSans-VariableFont_wdth,wght.woff2") format("woff2");
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "urbanist";
+    src: url("/fonts/Urbanist-VariableFont_wght.woff2") format("woff2");
+    font-display: swap;
+  }
+
+  html {
+    font-family: "Open Sans";
+  }
+}
+
+@theme {
+  --font-sans: "Open Sans", system-ui, sans-serif;
+  --font-urbanist: "urbanist", system-ui, sans-serif;
+}
+
+@theme {
+  /* NEUTRAL */
+  --color-netral-100: #ffffff;
+  --color-netral-200: #f0f0f0;
+  --color-netral-300: #c2c3c6;
+  --color-netral-400: #9a9ca2;
+  --color-netral-500: #75777e;
+  --color-netral-600: #6c6e75;
+  --color-netral-700: #333437;
+  --color-netral-800: #151618;
+
+  /* PRIMARY */
+  --color-primary: #396fef;
+  --color-primary-surface: #ebeeff;
+  --color-primary-hover: #718fff;
+  --color-primary-focus: #aebbfd;
+
+  /* SECONDARY */
+
+  --color-secondary: #ffb504;
+  --color-secondary-surface: #ffefd9;
+  --color-secondary-hover: #fecb51;
+  --color-secondary-focus: #f3d283;
+
+  /* SEMANTIC: DANGER */
+  --color-danger: #ff3a3a;
+  --color-danger-surface: #ffe5e5;
+  --color-danger-hover: #ff5858;
+
+  /* SEMANTIC: WARNING */
+  --color-warning: #ffaa2b;
+  --color-warning-surface: #f2dfc3;
+  --color-warning-hover: #eeb55f;
+
+  /* SEMANTIC: SUCCESS */
+  --color-success: #1fca31;
+  --color-success-surface: #d3ffd8;
+  --color-success-hover: #55f666;
+
+  --text-xs: 10px;
+  --text-s: 12px;
+  --text-m: 14px;
+  --text-l: 16px;
+  --text-heading-s: 18px;
+  --text-heading-m: 22px;
+  --text-heading-l: 26px;
+}
+
+.button {
+  width: 100%;
+  height: 46px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
