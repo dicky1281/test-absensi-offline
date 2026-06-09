@@ -38,8 +38,13 @@ function updateClock() {
 }
 
 function hexUidToDecimal(uid) {
-  const hex = uid.replaceAll(":", "");
-  return BigInt("0x" + hex).toString();
+  const cleanHex = uid.replaceAll(":", "");
+
+  const bytes = cleanHex.match(/.{1,2}/g);
+
+  const reversedHex = bytes.reverse().join("");
+
+  return BigInt("0x" + reversedHex).toString();
 }
 
 async function initNFC() {
@@ -58,7 +63,11 @@ async function initNFC() {
     ndef.addEventListener("reading", ({ serialNumber }) => {
       const decimalUid = hexUidToDecimal(serialNumber);
 
-      inputCode.value = hexUidToDecimal(serialNumber);
+      console.log("HEX ASLI ANDROID:", serialNumber);
+      console.log("DECIMAL HASIL REVERSE (MIRIP WEB):", decimalUid);
+
+      inputCode.value = decimalUid;
+
       handleScan();
     });
 
