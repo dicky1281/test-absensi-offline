@@ -37,6 +37,11 @@ function updateClock() {
   });
 }
 
+function hexUidToDecimal(uid) {
+  const hex = uid.replaceAll(":", "");
+  return BigInt("0x" + hex).toString();
+}
+
 async function initNFC() {
   if (!("NDEFReader" in window)) {
     console.log("Web NFC tidak didukung");
@@ -50,11 +55,13 @@ async function initNFC() {
 
     console.log("NFC aktif");
 
-    ndef.addEventListener("reading", (event) => {
-      console.log("FULL EVENT:", event);
-      console.log("SERIAL:", event.serialNumber);
+    ndef.addEventListener("reading", ({ serialNumber }) => {
+      const decimalUid = hexUidToDecimal(serialNumber);
 
-      inputCode.value = event.serialNumber;
+      console.log("HEX:", serialNumber);
+      console.log("DECIMAL:", decimalUid);
+
+      inputCode.value = decimalUid;
       handleScan();
     });
 
