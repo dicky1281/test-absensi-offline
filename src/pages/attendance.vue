@@ -61,7 +61,7 @@ async function initNFC() {
       console.log("HEX:", serialNumber);
       console.log("DECIMAL:", decimalUid);
 
-      inputCode.value = decimalUid;
+      inputCode.value = normalizeUid(serialNumber);
       handleScan();
     });
 
@@ -71,6 +71,10 @@ async function initNFC() {
   } catch (err) {
     console.error("NFC Error:", err);
   }
+}
+
+function normalizeUid(uid) {
+  return uid.trim().replaceAll(":", "").toUpperCase();
 }
 
 function focusInput() {
@@ -103,8 +107,8 @@ async function handleScan() {
 
   lastScanTime.value = nowScan;
 
-  const rfid = inputCode.value.trim();
-  alert("SCAN RESULT:", rfid);
+  const rfid = normalizeUid(inputCode.value);
+  console.log("SCAN RESULT:", rfid);
 
   const student = await db.students.where("rfid").equals(rfid).first();
 
