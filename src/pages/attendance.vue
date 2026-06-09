@@ -50,10 +50,11 @@ async function initNFC() {
 
     console.log("NFC aktif");
 
-    ndef.addEventListener("reading", ({ serialNumber }) => {
-      console.log("NFC:", serialNumber);
+    ndef.addEventListener("reading", (event) => {
+      console.log("FULL EVENT:", event);
+      console.log("SERIAL:", event.serialNumber);
 
-      inputCode.value = serialNumber;
+      inputCode.value = event.serialNumber;
       handleScan();
     });
 
@@ -96,6 +97,7 @@ async function handleScan() {
   lastScanTime.value = nowScan;
 
   const rfid = inputCode.value.trim();
+  alert("SCAN RESULT:", rfid);
 
   const student = await db.students.where("rfid").equals(rfid).first();
 
