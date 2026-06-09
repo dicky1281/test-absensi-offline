@@ -58,10 +58,7 @@ async function initNFC() {
     ndef.addEventListener("reading", ({ serialNumber }) => {
       const decimalUid = hexUidToDecimal(serialNumber);
 
-      console.log("HEX:", serialNumber);
-      console.log("DECIMAL:", decimalUid);
-
-      inputCode.value = normalizeUid(serialNumber);
+      inputCode.value = hexUidToDecimal(serialNumber);
       handleScan();
     });
 
