@@ -106,7 +106,6 @@ async function handleScan() {
       showErrorModal.value = false;
     }, 3000);
 
-    inputCode.value = "";
     focusInput();
     return;
   }
@@ -206,6 +205,7 @@ async function handleScan() {
         >
           <h2 class="text-base font-medium text-white">
             SMA Negeri 1 Rancaekek
+            {{ inputCode }}
           </h2>
 
           <span class="text-[30px] font-bold text-white">
