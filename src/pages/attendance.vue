@@ -37,6 +37,34 @@ function updateClock() {
   });
 }
 
+async function initNFC() {
+  if (!("NDEFReader" in window)) {
+    console.log("Web NFC tidak didukung");
+    return;
+  }
+
+  try {
+    const ndef = new NDEFReader();
+
+    await ndef.scan();
+
+    console.log("NFC aktif");
+
+    ndef.addEventListener("reading", ({ serialNumber }) => {
+      console.log("NFC:", serialNumber);
+
+      inputCode.value = serialNumber;
+      handleScan();
+    });
+
+    ndef.addEventListener("readingerror", () => {
+      console.error("Gagal membaca NFC");
+    });
+  } catch (err) {
+    console.error("NFC Error:", err);
+  }
+}
+
 function focusInput() {
   setTimeout(() => {
     rfidInput.value?.focus();
@@ -50,6 +78,8 @@ onMounted(() => {
   focusInput();
 
   window.addEventListener("click", focusInput);
+
+  initNFC();
 });
 
 async function handleScan() {
